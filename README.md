@@ -88,6 +88,9 @@ To add a new language for readability requirements:
 
 1.  (Optional) On the team's settings page, upload a logo.
 
+1.  Add the team as a member of this repository with `triage` or greater
+    permissions. You may need to ask a GitHub admin to help.
+
 1.  Update `terraform/main.tf` and add a new readabilty stanza. The easiest
     thing to do is to copy an existing readability stanza and update `<lang>`.
 
