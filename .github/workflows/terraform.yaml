@@ -37,6 +37,7 @@ jobs:
       working-directory: './terraform'
 
     - run: 'terraform apply -auto-approve'
+      if: ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
       env:
         GITHUB_TOKEN: '${{ secrets.ORGANIZATION_PAT }}'
-      if: ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+      working-directory: './terraform'
