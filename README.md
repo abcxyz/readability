@@ -82,6 +82,7 @@ To add a new language for readability requirements:
     - **Enable auto assignment**: Checked.
     - **How many team members should be assigned to review?**: 2.
     - **Routing algorithm**: Load balance.
+    - **Team review assignment**: Uncheck.
 
     Leave all other options as the default.
 
