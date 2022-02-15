@@ -35,6 +35,37 @@ To propose new readability:
     Usually these errors are due to improper formatting or invalid YAML.
 
 
+## Enforcing readability on a project
+
+By default, readabilty is not enforced. To enforce readability:
+
+1.  Grant `@abcxyz/<lang>-readability` `triage` or greater permissions on your
+    repository.
+
+1.  Add the following line(s) to your [`CODEOWNERS`][codeowners] file:
+
+    ```text
+    *.ext    @abcxyz/<lang>-readability
+    ```
+
+    for example, for Go readability:
+
+    ```text
+    *.go    @abcxyz/go-readability
+    ```
+
+    if your language has multiple file extensions, add them all:
+
+    ```text
+    *.java     @abcxyz/java-readability
+    *.scala    @abcxyz/java-readability
+    ```
+
+1.  Ensure you have [branch protection rules][branch-protection-rules] to
+    require a minimum number of reviewers. Specifically "Require review from
+    Code Owners".
+
+
 ## Adding a new language
 
 To add a new language for readability requirements:
@@ -63,3 +94,6 @@ To add a new language for readability requirements:
     maintainer. If you are the language owner, you can add yourself.
 
 1.  Propose a Pull Request with the changes.
+
+[codeowners]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[branch-protection-rules]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule
