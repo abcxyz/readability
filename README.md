@@ -1,0 +1,65 @@
+# Readability
+
+This repository contains per-language readability requirements and also serves
+as the source of truth for current readability members.
+
+
+## Standards
+
+Language-specific standards are available in the [standards/](standards) folder.
+
+
+## Proposing new readability
+
+To propose new readability:
+
+1.  Find the associated language YAML file in the `terraform` directory. For
+    example, to Go readability file is in `terraform/go.yaml`.
+
+1.  Propose a new membership under the members section:
+
+    ```yaml
+    github_username: 'member'
+    ```
+
+    for example:
+
+    ```yaml
+    sethvargo: 'member'
+    ```
+
+1.  Create a Pull Request - GitHub will automatically assign the appropriate
+    reviewers.
+
+    If the Pull Request reports errors, inspect the output and fix errors.
+    Usually these errors are due to improper formatting or invalid YAML.
+
+
+## Adding a new language
+
+To add a new language for readability requirements:
+
+1.  Manually create a team in the organization.
+
+    - **Name**: `<lang>-readability` (e.g. `go-readability`), all lowercase.
+    - **Description**: `<lang> readability` (e.g. `Go readability`), normal case.
+    - **Parent team**: No value.
+
+1.  Go to the team's settings page and click on "Code review" in the sidebar.
+
+    - **Only notify requested team members**: Checked.
+    - **Enable auto assignment**: Checked.
+    - **How many team members should be assigned to review?**: 2.
+    - **Routing algorithm**: Load balance.
+
+    Leave all other options as the default.
+
+1.  (Optional) On the team's settings page, upload a logo.
+
+1.  Update `terraform/main.tf` and add a new readabilty stanza. The easiest
+    thing to do is to copy an existing readability stanza and update `<lang>`.
+
+1.  Create a new YAML file `terraform/<lang>.yaml` and add at least one
+    maintainer. If you are the language owner, you can add yourself.
+
+1.  Propose a Pull Request with the changes.

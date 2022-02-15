@@ -1,0 +1,13 @@
+# This file defines the code ownership and, by proxy, the required reviewers for
+# the repository. It is parsed in order, with the most-specific match take
+# precedence.
+
+# Default fallback
+*    @helmick @sethvargo
+
+# Generic Terraform changes should be reviewed by a Terraform expert.
+*.tf    @crwilcox @helmick @sethvargo
+
+# Changes to the languages must be approved by existing language approvers.
+/terraform/go.yaml      @abcxyz/go-readability
+/terraform/java.yaml    @abcxyz/java-readability
