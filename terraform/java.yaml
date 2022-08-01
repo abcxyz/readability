@@ -1,5 +1,4 @@
 # Maintainers - do not change without permission
-mikehelmick: 'maintainer'
 sethvargo: 'maintainer'
 
 # Members - to add a new member, add their GitHub username and propose a PR with
@@ -7,3 +6,4 @@ sethvargo: 'maintainer'
 #
 #     github_username: 'member'
 #
+myurtoglu: 'member'
