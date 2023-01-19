@@ -47,3 +47,21 @@ resource "github_team_members" "java-readability" {
     }
   }
 }
+
+# Typescript
+data "github_team" "typescript-readability" {
+  slug = "typescript-readability"
+}
+
+resource "github_team_members" "typescript-readability" {
+  team_id = data.github_team.typescript-readability.id
+
+  dynamic "members" {
+    for_each = yamldecode(file("typescript.yaml"))
+
+    content {
+      username = members.key
+      role     = members.value
+    }
+  }
+}
