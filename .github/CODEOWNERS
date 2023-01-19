@@ -3,10 +3,10 @@
 # precedence.
 
 # Default fallback
-*    @helmick @sethvargo
+*    @mikehelmick @sethvargo
 
 # Generic Terraform changes should be reviewed by a Terraform expert.
-*.tf    @crwilcox @helmick @sethvargo
+*.tf    @crwilcox @mikehelmick @sethvargo
 
 # Changes to the languages must be approved by existing language approvers.
 /terraform/go.yaml            @abcxyz/go-readability
