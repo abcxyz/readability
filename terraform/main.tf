@@ -67,3 +67,21 @@ resource "github_team_members" "typescript-readability" {
     }
   }
 }
+
+# Terraform
+data "github_team" "terraform-readability" {
+  slug = "terraform-readability"
+}
+
+resource "github_team_members" "terraform-readability" {
+  team_id = data.github_team.terraform-readability.id
+
+  dynamic "members" {
+    for_each = yamldecode(file("terraform.yaml"))
+
+    content {
+      username = members.key
+      role     = members.value
+    }
+  }
+}
