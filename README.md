@@ -6,7 +6,8 @@ as the source of truth for current readability members.
 
 ## Standards
 
-Language-specific standards are available in the [standards/](standards) folder.
+Language-specific standards are available in the
+[WiKi](https://github.com/abcxyz/readability/wiki).
 
 
 ## Proposing new readability
