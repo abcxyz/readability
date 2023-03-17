@@ -15,12 +15,12 @@ provider "github" {
 }
 
 # Go
-data "github_team" "go-readability" {
+data "github_team" "go_readability" {
   slug = "go-readability"
 }
 
-resource "github_team_members" "go-readability" {
-  team_id = data.github_team.go-readability.id
+resource "github_team_members" "go_readability" {
+  team_id = data.github_team.go_readability.id
 
   dynamic "members" {
     for_each = yamldecode(file("go.yaml"))
@@ -33,12 +33,12 @@ resource "github_team_members" "go-readability" {
 }
 
 # Java
-data "github_team" "java-readability" {
+data "github_team" "java_readability" {
   slug = "java-readability"
 }
 
-resource "github_team_members" "java-readability" {
-  team_id = data.github_team.java-readability.id
+resource "github_team_members" "java_readability" {
+  team_id = data.github_team.java_readability.id
 
   dynamic "members" {
     for_each = yamldecode(file("java.yaml"))
@@ -51,12 +51,12 @@ resource "github_team_members" "java-readability" {
 }
 
 # Typescript
-data "github_team" "typescript-readability" {
+data "github_team" "typescript_readability" {
   slug = "typescript-readability"
 }
 
-resource "github_team_members" "typescript-readability" {
-  team_id = data.github_team.typescript-readability.id
+resource "github_team_members" "typescript_readability" {
+  team_id = data.github_team.typescript_readability.id
 
   dynamic "members" {
     for_each = yamldecode(file("typescript.yaml"))
@@ -69,12 +69,12 @@ resource "github_team_members" "typescript-readability" {
 }
 
 # Terraform
-data "github_team" "terraform-readability" {
+data "github_team" "terraform_readability" {
   slug = "terraform-readability"
 }
 
-resource "github_team_members" "terraform-readability" {
-  team_id = data.github_team.terraform-readability.id
+resource "github_team_members" "terraform_readability" {
+  team_id = data.github_team.terraform_readability.id
 
   dynamic "members" {
     for_each = yamldecode(file("terraform.yaml"))
