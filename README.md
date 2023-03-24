@@ -75,22 +75,19 @@ To add a new language for readability requirements:
 
     - **Name**: `<lang>-readability` (e.g. `go-readability`), all lowercase.
     - **Description**: `<lang> readability` (e.g. `Go readability`), normal case.
-    - **Parent team**: No value.
+    - **Parent team**: `readability`.
 
 1.  Go to the team's settings page and click on "Code review" in the sidebar.
 
     - **Only notify requested team members**: Checked.
     - **Enable auto assignment**: Checked.
-    - **How many team members should be assigned to review?**: 2.
+    - **How many team members should be assigned to review?**: 1.
     - **Routing algorithm**: Load balance.
     - **Team review assignment**: Uncheck.
 
     Leave all other options as the default.
 
 1.  (Optional) On the team's settings page, upload a logo.
-
-1.  Add the team as a member of this repository with `triage` or greater
-    permissions. You may need to ask a GitHub admin to help.
 
 1.  Update `terraform/main.tf` and add a new readabilty stanza. The easiest
     thing to do is to copy an existing readability stanza and update `<lang>`.
