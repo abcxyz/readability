@@ -14,8 +14,8 @@ Language-specific standards are available in the
 
 To propose new readability:
 
-1.  Find the associated language YAML file in the `terraform` directory. For
-    example, to Go readability file is in `terraform/go.yaml`.
+1.  Find the associated language YAML file in the `config` directory. For
+    example, to Go readability file is in `config/go.yaml`.
 
 1.  Propose a new membership under the members section:
 
@@ -92,10 +92,7 @@ To add a new language for readability requirements:
 1.  Add the team as a member of this repository with `triage` or greater
     permissions. You may need to ask a GitHub admin to help.
 
-1.  Update `terraform/main.tf` and add a new readabilty stanza. The easiest
-    thing to do is to copy an existing readability stanza and update `<lang>`.
-
-1.  Create a new YAML file `terraform/<lang>.yaml` and add at least one
+1.  Create a new YAML file `config/<lang>.yaml` and add at least one
     maintainer. If you are the language owner, you can add yourself.
 
 1.  Propose a Pull Request with the changes.

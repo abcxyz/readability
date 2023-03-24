@@ -1,0 +1,58 @@
+name: 'apply'
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+concurrency:
+  group: '${{ github.workflow }}-${{ github.head_ref || github.ref }}'
+  cancel-in-progress: true
+jobs:
+  apply:
+    name: 'apply'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c' # ratchet:actions/checkout@v3
+      - name: 'mint token'
+        id: 'mint-token'
+        uses: 'abcxyz/github-token-minter/.github/actions/mint-token@c6ea9b91e3e1df75a6e86dad8e5b0a0a45b42fec'
+        with:
+          wif_provider: '${{ vars.TOKEN_MINTER_WIF_PROVIDER }}'
+          wif_service_account: '${{ vars.TOKEN_MINTER_WIF_SERVICE_ACCOUNT }}'
+          service_audience: '${{ vars.TOKEN_MINTER_SERVICE_AUDIENCE }}'
+          service_url: '${{ vars.TOKEN_MINTER_SERVICE_URL }}'
+          requested_permissions: |-
+            {
+              "repositories": [],
+              "permissions": {
+                "members": "write"
+              }
+            }
+      - id: 'apply updates'
+        env:
+          TOKEN: '${{ steps.mint-token.outputs.token }}'
+        uses: 'actions/github-script@98814c53be79b1d30f795b907e553d8679345975' # ratchet:actions/github-script@v6
+        with:
+          script: |
+            try {
+                const { TOKEN } = process.env;
+                const files = fs.readdirSync("./config/");
+                for (const idx in files){
+                    const file = files[idx]
+                    const regex = /([A-Za-z]+)\.yaml/;
+                    const matches = file.match(regex)
+                    const lang = matches[1]
+                    const teamName = `${lang}-readability`;
+                    const org = "abcxyz";
+                    const team = yaml.load(fs.readFileSync(`config/${file}`, 'utf8'));
+                    const octokit = github.getOctokit(TOKEN);
+                    for (const member in team) {
+                        const role = team[member];
+                        console.log(`Adding or updating: ${org}:${teamName} - ${member}:${role}`);
+                        await octokit.rest.teams.addOrUpdateMembershipForUserInOrg({ org: org, team_slug: teamName, username: member, role: role });
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+                core.setFailed(error.message);
+            }}
