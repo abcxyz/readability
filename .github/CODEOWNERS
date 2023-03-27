@@ -5,6 +5,8 @@
 # Default fallback
 *    @abcxyz/breakglass
 
+*    @abcxyz/infrastructure-team
+
 # Generic Terraform changes should be reviewed by a Terraform expert.
 *.tf    @abcxyz/terraform-readability
 
