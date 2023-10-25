@@ -13,4 +13,5 @@
 # Changes to the languages must be approved by existing language approvers.
 /terraform/go.yaml            @abcxyz/go-readability
 /terraform/java.yaml          @abcxyz/java-readability
+/terraform/terraform.yaml     @abcxyz/terraform-readability
 /terraform/typescript.yaml    @abcxyz/typescript-readability
