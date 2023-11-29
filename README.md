@@ -75,13 +75,24 @@ When a language exceeds the limited use phase a group will be created for it as 
 
 ### Add a new language for widespread adoption
 
-1. Manually create a team in the organization.
+1. Manually create two teams in the organization.
 
-    - **Name**: `<lang>-readability` (e.g. `go-readability`), all lowercase.
-    - **Description**: `<lang> readability` (e.g. `Go readability`), normal case.
-    - **Parent team**: `readability`.
+    - **Main readability team**: - This is the team that will have people that
+      have been granted readability.
 
-1. Go to the team's settings page and click on "Code review" in the sidebar.
+        - **Name**: `<lang>-readability` (e.g. `go-readability`), all lowercase.
+        - **Description**: `<lang> readability` (e.g. `Go readability`), normal case.
+        - **Parent team**: `readability`.
+
+    - **Readability approvers team**: - This is the team that has permission to
+      grant other people readability.
+
+        - **Name**: `<lang>-readability-approvers` (e.g. `go-readability-approvers`), all lowercase.
+        - **Description**: `<lang> readability approvers` (e.g. `Go readability approvers`), normal case.
+        - **Parent team**: `readability`.
+
+1. Go to the team's settings page for each team and click on "Code review" in
+   the sidebar.
 
     - **Only notify requested team members**: Checked.
     - **Enable auto assignment**: Checked.
@@ -93,8 +104,7 @@ When a language exceeds the limited use phase a group will be created for it as 
 
 1. (Optional) On the team's settings page, upload a logo.
 
-1. Update `terraform/main.tf` and add a new readabilty stanza. The easiest
-    thing to do is to copy an existing readability stanza and update `<lang>`.
+1. Update `terraform/main.tf` and add a new readabilty option to the `for_each`.
 
 1. Create a new YAML file `terraform/<lang>.yaml` and add at least one
     maintainer. If you are the language owner, you can add yourself.
