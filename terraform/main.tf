@@ -17,6 +17,7 @@ module "readability" {
   for_each = toset([
     "go",
     "java",
+    "python",
     "terraform",
     "typescript",
   ])
