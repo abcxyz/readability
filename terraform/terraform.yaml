@@ -9,4 +9,4 @@ verbanicm: 'maintainer'
 #     github_username: 'member'
 #
 gjonathanhong: 'member'
-shankiyani: 'member'
+# shankiyani: 'member' # temporarily remove so stops getting auto-suggested as reviewer while OOO
