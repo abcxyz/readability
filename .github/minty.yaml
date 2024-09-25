@@ -1,0 +1,17 @@
+version: 'minty.abcxyz.dev/v2'
+
+rule:
+  if: |-
+    assertion.iss == 'https://token.actions.githubusercontent.com' &&
+    assertion.organization_id == '93787867' &&
+    assertion.repository_id == '459387092' &&
+    assertion.ref == 'refs/heads/main'
+
+scope:
+  terraform:
+    rule:
+      if: |-
+        assertion.workflow_ref.startsWith("abcxyz/readability/.github/workflows/terraform.yaml")
+    repositories: []
+    permissions:
+      members: 'write'
