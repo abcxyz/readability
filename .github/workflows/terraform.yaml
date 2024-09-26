@@ -40,6 +40,7 @@ jobs:
           service_url: '${{ vars.TOKEN_MINTER_SERVICE_URL }}'
           requested_permissions: |-
             {
+              "scope": "readability",
               "repositories": [],
               "permissions": {
                 "members": "write"
