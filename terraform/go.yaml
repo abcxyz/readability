@@ -1,6 +1,6 @@
 # Maintainers - do not change without permission
 sethvargo: 'maintainer'
-yolocs: 'maintainer'
+verbanicm: 'maintainer'
 
 # Members - to add a new member, add their GitHub username and propose a PR with
 # them as a reviewer.
@@ -10,4 +10,3 @@ yolocs: 'maintainer'
 capri-xiyue: 'member'
 drevell: 'member'
 sailorlqh: 'member'
-verbanicm: 'member'
