@@ -2,7 +2,7 @@
 # the repository. It is parsed in order, with the most-specific match take
 # precedence.
 
-# Default fallback
+# Default fallback.
 *    @abcxyz/breakglass
 
 *    @abcxyz/infrastructure-team
