@@ -37,7 +37,7 @@ data "github_team" "readability_approvers" {
   slug = "${var.language}-readability-approvers"
 }
 
-resource "github_team_members" "readability-approvers" {
+resource "github_team_members" "readability_approvers" {
   team_id = data.github_team.readability_approvers.id
 
   dynamic "members" {

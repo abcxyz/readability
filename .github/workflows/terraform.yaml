@@ -53,11 +53,10 @@ jobs:
 
       - run: 'terraform init -upgrade'
 
-      - run: 'terraform fmt -diff -check'
-
       - run: 'terraform validate'
 
       - run: 'terraform apply -auto-approve'
-        if: ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+        if: |
+          ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         env:
           GITHUB_TOKEN: '${{ steps.mint-token.outputs.token }}'

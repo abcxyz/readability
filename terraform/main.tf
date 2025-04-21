@@ -22,6 +22,7 @@ module "readability" {
     "typescript",
   ])
 
-  source   = "./readability"
+  source = "./readability"
+
   language = each.key
 }
