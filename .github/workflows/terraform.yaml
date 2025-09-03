@@ -1,4 +1,4 @@
-name: 'terraform'
+name: 'terrafrom' # TODO(sethvargo): rename
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
     branches:
       - 'main'
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '0 */12 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -21,22 +21,33 @@ permissions:
 
 defaults:
   run:
-    working-directory: './terraform'
+    shell: 'bash'
 
 jobs:
-  terraform:
-    name: 'terraform'
+  terraform: # TODO(sethvargo): remove
+    name: 'terraform' # TODO(sethvargo): remove
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: 'actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11' # ratchet:actions/checkout@v4
+      - name: 'Checkout'
+        uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # ratchet:actions/checkout@v5
 
-      - name: 'mint token'
-        id: 'mint-token'
-        uses: 'abcxyz/github-token-minter/.github/actions/mint-token@main' # ratchet:exclude
+      - name: 'Auth'
+        id: 'minty-auth'
+        uses: 'google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093' # ratchet:google-github-actions/auth@v3
         with:
-          wif_provider: '${{ vars.TOKEN_MINTER_WIF_PROVIDER }}'
-          wif_service_account: '${{ vars.TOKEN_MINTER_WIF_SERVICE_ACCOUNT }}'
-          service_audience: '${{ vars.TOKEN_MINTER_SERVICE_AUDIENCE }}'
+          create_credentials_file: false
+          export_environment_variables: false
+          workload_identity_provider: '${{ vars.TOKEN_MINTER_WIF_PROVIDER }}'
+          service_account: '${{ vars.TOKEN_MINTER_WIF_SERVICE_ACCOUNT }}'
+          token_format: 'id_token'
+          id_token_audience: '${{ vars.TOKEN_MINTER_SERVICE_AUDIENCE }}'
+          id_token_include_email: true
+
+      - name: 'Mint token'
+        id: 'mint-token'
+        uses: 'abcxyz/github-token-minter/.github/actions/minty@main' # ratchet:exclude
+        with:
+          id_token: '${{ steps.minty-auth.outputs.id_token }}'
           service_url: '${{ vars.TOKEN_MINTER_SERVICE_URL }}'
           requested_permissions: |-
             {
@@ -47,16 +58,16 @@ jobs:
               }
             }
 
-      - uses: 'hashicorp/setup-terraform@a1502cd9e758c50496cc9ac5308c4843bcd56d36' # ratchet:hashicorp/setup-terraform@v3
+      - name: 'Setup Go'
+        uses: 'actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5' # ratchet:actions/setup-go@v5
         with:
-          terraform_version: '1.6.x'
+          go-version-file: 'go.mod'
 
-      - run: 'terraform init -upgrade'
-
-      - run: 'terraform validate'
-
-      - run: 'terraform apply -auto-approve'
-        if: |
-          github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      - name: 'Sync'
         env:
-          GITHUB_TOKEN: '${{ steps.mint-token.outputs.token }}'
+          DRY_RUN: >-
+            ${{ github.event_name == 'pull_request' }}
+          DEBUG: '${{ fromJSON(runner.debug || false) }}'
+          GITHUB_TOKEN: '${{ steps.mint-token.outputs.token || github.token }}'
+        run: |-
+          go run ./internal/cmd/sync/main.go
