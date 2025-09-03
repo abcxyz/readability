@@ -1,4 +1,4 @@
-name: 'terrafrom' # TODO(sethvargo): rename
+name: 'Readability sync'
 
 on:
   push:
@@ -24,8 +24,7 @@ defaults:
     shell: 'bash'
 
 jobs:
-  terraform: # TODO(sethvargo): remove
-    name: 'terraform' # TODO(sethvargo): remove
+  sync:
     runs-on: 'ubuntu-latest'
     steps:
       - name: 'Checkout'
