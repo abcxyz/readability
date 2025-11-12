@@ -70,3 +70,4 @@ jobs:
           GITHUB_TOKEN: '${{ steps.mint-token.outputs.token || github.token }}'
         run: |-
           go run ./internal/cmd/sync/main.go
+
