@@ -1,5 +1,13 @@
 # Readability
 
+**NOTE**: This repository is no longer active. Assigned readability has been 
+replaced with a Gemini based bot that enforces readability standards. More details
+can be found at [abcxyz/gemini-readability](https://github.com/abcxyz/actions/blob/main/.github/workflows/gemini-readability.yml).
+
+WE ARE NO LONGER ACCEPTING NEW READABILITY MEMBERS.
+
+## Legacy Readability
+
 This repository contains per-language readability requirements and also serves
 as the source of truth for current readability members.
 
